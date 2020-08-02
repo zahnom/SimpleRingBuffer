@@ -26,5 +26,4 @@ CLion is the recommended development environment for this project.
 1. Clone the repo.
 2. Create a build directory.
 3. Change into build directory and run `conan install ..`.
-4. Run `cmake ..`.
-5. Run `make`.
+4. Run `cmake ..` and afterwards `make`.
