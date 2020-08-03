@@ -1,3 +1,5 @@
+[ ![Download](https://api.bintray.com/packages/zahnom/conan-main/SimpleRingBuffer%3Azahnom/images/download.svg) ](https://bintray.com/zahnom/conan-main/SimpleRingBuffer%3Azahnom/_latestVersion)
+
 # SimpleRingBuffer
 A simple ring buffer implementation in C.
 
