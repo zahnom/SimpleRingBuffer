@@ -3,8 +3,8 @@ from conans import ConanFile, CMake
 
 class SimpleRingBufferConan(ConanFile):
     name = "SimpleRingBuffer"
-    version = "1.0"
-    license = "<Put the package license here>"
+    version = "1.1"
+    license = "GLP-3.0"
     author = "Marc Zahno, zahnom@me.com"
     url = "https://github.com/zahnom/SimpleRingBuffer"
     settings = "os", "compiler", "build_type", "arch"

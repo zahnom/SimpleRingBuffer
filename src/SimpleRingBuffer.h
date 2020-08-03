@@ -9,6 +9,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+#define SimpleRingBuffer_BUFFER_SIZE 512
+#define SimpleRingBuffer_BUFFER_POOL_SIZE 5
+
 typedef struct RingBuffer_s *RingBuffer;
 
 uint32_t RingBuffer_GetBufferPoolSize();

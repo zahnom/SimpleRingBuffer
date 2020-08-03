@@ -7,22 +7,19 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define BUFFER_SIZE 512
-#define BUFFER_POOL_SIZE 5
-
 struct RingBuffer_s {
     bool isInUse;
     uint16_t index; // Points to the last char added to the buffer.
-    uint8_t data[BUFFER_SIZE];
+    uint8_t data[SimpleRingBuffer_BUFFER_SIZE];
 };
 
-static struct RingBuffer_s BufferPool[BUFFER_POOL_SIZE];
+static struct RingBuffer_s BufferPool[SimpleRingBuffer_BUFFER_POOL_SIZE];
 
 static inline uint16_t DecrementIndexBy(uint16_t index, uint16_t subtrahend){
-    return (index + BUFFER_SIZE - subtrahend) % BUFFER_SIZE;
+    return (index + SimpleRingBuffer_BUFFER_SIZE - subtrahend) % SimpleRingBuffer_BUFFER_SIZE;
 }
 static inline uint16_t IncrementIndexBy(uint16_t index, uint16_t addend){
-    return (index + addend) % BUFFER_SIZE;
+    return (index + addend) % SimpleRingBuffer_BUFFER_SIZE;
 }
 static inline uint16_t IncrementIndex(uint16_t index){
     return IncrementIndexBy(index, 1);
@@ -32,26 +29,26 @@ static inline void PutCharIntoBuffer(RingBuffer instance, uint8_t c){
     instance->index = IncrementIndex(instance->index);
 }
 inline uint32_t RingBuffer_GetBufferPoolSize(){
-    return BUFFER_POOL_SIZE;
+    return SimpleRingBuffer_BUFFER_POOL_SIZE;
 }
 inline uint32_t RingBuffer_GetBufferSize(){
-    return BUFFER_SIZE;
+    return SimpleRingBuffer_BUFFER_SIZE;
 }
 static inline void ForEachInstance(void (*f)(RingBuffer buffer)){
-    for(uint32_t i=0; i<BUFFER_POOL_SIZE; i++){
+    for(uint32_t i=0; i<SimpleRingBuffer_BUFFER_POOL_SIZE; i++){
         RingBuffer currentBuffer = &BufferPool[i];
         f(currentBuffer);
     }
 }
 static void ResetData(RingBuffer instance){
-    for(uint32_t i=0; i<BUFFER_SIZE; i++){
+    for(uint32_t i=0; i<SimpleRingBuffer_BUFFER_SIZE; i++){
         instance->data[i] = 0;
     }
 }
 static RingBuffer FindFreeInstance(){
 
     // Search for a free buffer in the buffer pool.
-    for(uint32_t i=0; i<BUFFER_POOL_SIZE; i++){
+    for(uint32_t i=0; i<SimpleRingBuffer_BUFFER_POOL_SIZE; i++){
         RingBuffer currentBuffer = &BufferPool[i];
 
         if(currentBuffer->isInUse == false)
